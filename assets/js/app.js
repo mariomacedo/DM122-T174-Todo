@@ -26,7 +26,7 @@ class App {
     navigator.serviceWorker
       .register('sw.js')
       .then(onsuccess)
-      .catch(onfailure)
+      .catch(onfailure);
   }
 }
 
