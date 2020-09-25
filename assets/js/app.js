@@ -1,11 +1,23 @@
-'use strict'
+class App {
 
-if ('serviceWorker' in navigator) {
-  const onsuccess = () => console.log('[Service Worker] Registered');
-  const onfailure = () => console.log('[Service Worker] Failed');
+  constructor() {
+    this.registerServiceWorker();
+  }
 
-  navigator.serviceWorker
-    .register('sw.js')
-    .then(onsuccess)
-    .catch(onfailure)
+  registerServiceWorker() {
+    if (!'serviceWorker' in navigator) {
+      console.info('Offline feature is not available on this browser');
+      return;
+    }
+
+    const onsuccess = () => console.log('[Service Worker] Registered');
+    const onfailure = () => console.log('[Service Worker] Failed');
+
+    navigator.serviceWorker
+      .register('sw.js')
+      .then(onsuccess)
+      .catch(onfailure)
+  }
 }
+
+new App();
