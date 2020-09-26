@@ -1,8 +1,10 @@
+import TodoService from './TodoService.js';
 class App {
 
   constructor() {
     this.registerServiceWorker();
     this.bindFormEvent();
+    new TodoService();
   }
 
   bindFormEvent() {
