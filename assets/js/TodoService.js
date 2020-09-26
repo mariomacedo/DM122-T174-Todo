@@ -4,7 +4,6 @@ export default class TodoService {
 
   constructor() {
     this.initializeDB();
-    this.getList();
   }
 
   async initializeDB() {
@@ -25,8 +24,11 @@ export default class TodoService {
   }
 
   async getList() {
-    const tasks = await db.tasks.toArray();
-    return tasks;
+    return db.tasks.toArray();
+  }
+
+  async get(id) {
+    return db.tasks.get(id);
   }
 
   async save(task) {
