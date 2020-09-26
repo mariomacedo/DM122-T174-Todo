@@ -43,20 +43,34 @@ export default class HtmlService {
     this.saveTask(taskId, isDone);
   }
 
-  addToHtmlList(item) {
+  async deleteTask(li) {
+    const taskId = +li.getAttribute('data-item-id');
+    await this.todoService.delete(taskId);
+    this.removeFromHtmlList(taskId);
+  }
+
+  removeFromHtmlList(taskId) {
+    const li = document.querySelector(`[data-item-id='${taskId}']`);
+    ul.removeChild(li);
+  }
+
+  addToHtmlList(task) {
     const li = document.createElement('li');
     const span = document.createElement('span');
     const button = document.createElement('button');
 
-    li.setAttribute('data-item-id', item.id);
+    li.setAttribute('data-item-id', task.id);
     li.addEventListener('click', () => this.toggleTask(li));
-    span.textContent = item.description;
+    span.textContent = task.description;
 
     button.textContent = 'x';
-    // button.addEventListener('click', HtmlService.buttonHandler)
+    button.addEventListener('click', (event) => {
+      event.stopPropagation();
+      this.deleteTask(li);
+    });
 
-    if (item.done) {
-      li.classList.add('done');
+    if (task.done) {
+      li.classList.add(DONE);
     }
 
     li.appendChild(span);
