@@ -11,11 +11,18 @@ export default class HtmlService {
   }
 
   bindFormEvent() {
-    form.addEventListener('submit', event => {
+    form.addEventListener('submit', async event => {
       event.preventDefault();
-      console.log(form.item.value);
+      await this.addTask(form.item.value);
       form.reset();
     });
+  }
+
+  async addTask(description) {
+    const task = { description, done: false };
+    const taskId = await this.todoService.save(task);
+    task.id = taskId;
+    this.addToHtmlList(task);
   }
 
   async listTasks() {
