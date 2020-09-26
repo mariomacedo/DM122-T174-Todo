@@ -35,7 +35,7 @@ export default class TodoService {
     return db.tasks.put(task);
   }
 
-  async delete(taskId) {
-    return db.tasks.delete(taskId);
+  async delete(id) {
+    return db.tasks.delete(id);
   }
 }
