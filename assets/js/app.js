@@ -1,11 +1,22 @@
-'use strict'
+import HtmlService from "./HtmlService.js";
 
-if ('serviceWorker' in navigator) {
-  const onsuccess = () => console.log('[Service Worker] Registered');
-  const onfailure = () => console.log('[Service Worker] Failed');
+class App {
+  constructor() {
+    this.registerServiceWorker();
+    new HtmlService();
+  }
 
-  navigator.serviceWorker
-    .register('sw.js')
-    .then(onsuccess)
-    .catch(onfailure);
+  registerServiceWorker() {
+    if ("serviceWorker" in navigator) {
+      const onsuccess = () => console.log("[Service Worker] Registered");
+      const onfailure = () => console.log("[Service Worker] Failed");
+
+      navigator.serviceWorker
+        .register("sw.js")
+        .then(onsuccess)
+        .catch(onfailure);
+    }
+  }
 }
+
+new App();
