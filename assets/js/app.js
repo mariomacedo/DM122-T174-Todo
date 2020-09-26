@@ -1,19 +1,16 @@
 import TodoService from './TodoService.js';
+import HtmlService from './HtmlService.js';
+
 class App {
 
   constructor() {
     this.registerServiceWorker();
-    this.bindFormEvent();
-    new TodoService();
+    this.start();
   }
 
-  bindFormEvent() {
-    const form = document.querySelector('form');
-    form.addEventListener('submit', event => {
-      event.preventDefault();
-      console.log(form.item.value);
-      form.reset();
-    });
+  start() {
+    const todoService = new TodoService();
+    new HtmlService(todoService);
   }
 
   registerServiceWorker() {
