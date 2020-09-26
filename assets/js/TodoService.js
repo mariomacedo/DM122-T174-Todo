@@ -25,4 +25,16 @@ export default class TodoService {
   getAll() {
     return db.tasks.toArray();
   }
+
+  get(id) {
+    return db.tasks.get(id);
+  }
+
+  save(task) {
+    return db.tasks.put(task);
+  }
+
+  delete(id) {
+    return db.tasks.delete(id);
+  }
 }
